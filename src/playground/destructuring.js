@@ -16,12 +16,11 @@ const { name: publisherName = "Default Title" } = book.publisher;
 console.log(`${publisherName}`);
 
 // Object destructuring can also be used for arguments in funcitons.
-const add = ({a, b}, c) => {
-  return a + b;
+const add = ({a = 1, b = 1}, c = 1) => {
+  return a + b + c;
 }
 
-console.log(add({1,3}, 100));
-
+console.log(add({a: 1, b: 3}, 100));
 
 
 // Array Destructuring
