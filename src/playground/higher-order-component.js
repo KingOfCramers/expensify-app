@@ -45,7 +45,7 @@ const allWarning = (WrappedComponent) => {
     return (props) => {
       return (
         <div>
-        {(props.isAuthenticated && props.isAdmin)? ( <WrappedComponent {...props} /> ) : ( <p>User is not authenticated and an admin.</p> )}
+        {(props.isAuthenticated && props.isAdmin) ? ( <WrappedComponent {...props} /> ) : ( <p>User is not authenticated and an admin.</p> )}
         </div>
       );
     };

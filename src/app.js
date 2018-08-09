@@ -2,24 +2,25 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import 'normalize.css/normalize.css';
 import './styles/styles.scss';
+import { Provider } from "react-redux";
 
 // Redux
 import configureStore from "./store/configureStore";
 import { addExpense, removeExpense, editExpense } from "./actions/expenses";
 import { sortByAmount, sortByDate, setStartDate, setEndDate, setTextFilter } from "./actions/filters";
 import getVisibleExpenses from "./selectors/expenses.js";
+import AppRouter from "./routers/AppRouter"
 
 const store = configureStore();
 
-/*  store.dispatch(addExpense({description: 'Rent', amount: 100, createdAt: -20}));
-  store.dispatch(addExpense({description: 'Coffee', amount: 500, createdAt: 20}));
-  store.dispatch(addExpense({description: 'Beer', amount: 200, createdAt: -120}));
-  store.dispatch(sortByAmount());
-  const state = store.getState();
-  const visibleExpenses = getVisibleExpenses(state.expenses, state.filters);
-  console.log("Visible Expenses: \n", visibleExpenses, "\n Filters: \n", state.filters);*/
-
+const expenseOne = store.dispatch(addExpense({description: 'Rent', amount: 100, createdAt: -20}));
+const expenseTwo = store.dispatch(addExpense({description: 'Coffee', amount: 500, createdAt: 20}));
+const expenseThree = store.dispatch(addExpense({description: 'Remove ME!', amount: 900}));
 // Routes
-import AppRouter from "./routers/AppRouter"
+const jsx = (
+  <Provider store={store}>
+    <AppRouter />
+  </Provider>
+);
 
-ReactDOM.render(<AppRouter />, document.getElementById('app'));
+ReactDOM.render(jsx, document.getElementById('app'));
