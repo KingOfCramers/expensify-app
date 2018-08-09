@@ -22,6 +22,8 @@ const add = ({a = 1, b = 1}, c = 1) => {
 
 console.log(add({a: 1, b: 3}, 100));
 
+/// This is the equivalent of writing const {a , b} = {a: 1, b: 2 };
+
 
 // Array Destructuring
 
