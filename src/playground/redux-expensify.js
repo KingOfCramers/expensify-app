@@ -173,7 +173,7 @@ import uuid from "uuid";
   //  store.dispatch(editExpense(expenseOne.expense.id, { description: "Not my rent!" }));
   //  store.dispatch(setTextFilter(""));
   //  store.dispatch(sortByDate());
-  //  store.dispatch(sortByAmount());
+    store.dispatch(sortByAmount());
   //  store.dispatch(setStartDate(3));
   //  store.dispatch(setStartDate());
   //  store.dispatch(setEndDate(9));
