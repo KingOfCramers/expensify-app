@@ -27,8 +27,7 @@ const adminWarning = (WrappedComponent) => {
   return (props) => { // Return a FUNCTION, passing it our props.
     return (
       <div>
-        {props.isAdmin && <p>User is admin</p> }
-        <WrappedComponent {...props} />
+      { props.isAdmin ? ( <WrappedComponent {...props} /> ) : ( <p>User is not an Admin.</p> )}
       </div>
     )
   };
@@ -37,8 +36,7 @@ const adminWarning = (WrappedComponent) => {
 const authenticationWarning = (WrappedComponent) => {
   return (props) => (
     <div>
-      {props.isAuthenticated && <p> User is authenticated </p> }
-      <WrappedComponent {...props}/>
+      {props.isAuthenticated ? ( <WrappedComponent {...props} /> ) : ( <p>User is not authenticated.</p> )}
     </div>
   );
 };
@@ -47,9 +45,7 @@ const allWarning = (WrappedComponent) => {
     return (props) => {
       return (
         <div>
-        { props.isAdmin && <p>User is admin</p> }
-        { props.isAuthenticated && <p> User is authenticated </p> }
-        <WrappedComponent {...props}/>
+        {(props.isAuthenticated && props.isAdmin)? ( <WrappedComponent {...props} /> ) : ( <p>User is not authenticated and an admin.</p> )}
         </div>
       );
     };
