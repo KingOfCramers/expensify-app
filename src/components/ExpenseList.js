@@ -1,17 +1,21 @@
 import React from "react";
 import { connect } from "react-redux";
-
+import ExpenseListItem from "./ExpenseListItem";
+import selectExpenses from "../selectors/expenses";
+// Unconnected
 const ExpenseList = (props) => (
   <div>
     <h2>ExpenseList</h2>
-    {props.expenses.length}
+    {props.expenses.map((expense) => {
+      return <ExpenseListItem key={expense.id} {...expense}/>
+    })}
   </div>
 );
 
-const ConnectedExpenseList = connect((state) => { // This lets us determine what aspects of the redux state we want to pass in.
+const mapStateToProps = (state) => { // This lets us determine what aspects of the redux state we want to pass in.
   return {
-    expenses: state.expenses
+    expenses: selectExpenses(state.expenses, state.filters)
   }
-})(ExpenseList); // "connect" is a higher order component.
+}
 
-export default ConnectedExpenseList; // This is renamed in our dashboard.
+export default connect(mapStateToProps)(ExpenseList); // "connect" is a higher order component.
