@@ -14,7 +14,7 @@ const ExpenseList = (props) => (
 
 const mapStateToProps = (state) => { // This lets us determine what aspects of the redux state we want to pass in.
   return {
-    expenses: selectExpenses(state.expenses, state.filters)
+    expenses: selectExpenses(state.expenses, state.filters) // Use the values on our state object to calculate the visible expenses.
   }
 }
 
