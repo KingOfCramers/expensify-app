@@ -1,8 +1,6 @@
+// React
 import React from 'react';
 import ReactDOM from 'react-dom';
-import 'normalize.css/normalize.css';
-import './styles/styles.scss';
-import "react-dates/lib/css/_datepicker.css"; // From airbnb datepicker
 import { Provider } from "react-redux";
 
 // Redux
@@ -11,7 +9,14 @@ import { addExpense, removeExpense, editExpense } from "./actions/expenses";
 import { sortByAmount, sortByDate, setStartDate, setEndDate, setTextFilter } from "./actions/filters";
 import AppRouter from "./routers/AppRouter"
 
+// Styles
+import 'normalize.css/normalize.css';
+import './styles/styles.scss';
+import "react-dates/lib/css/_datepicker.css"; // From airbnb datepicker
+
 const store = configureStore();
+
+// console.log("Source maps working");
 
 store.dispatch(addExpense({description: 'Rent', amount: 100}));
 store.dispatch(addExpense({description: 'Coffee', amount: 6000}));
