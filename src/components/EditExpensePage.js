@@ -4,12 +4,11 @@ import ExpenseForm from "./ExpenseForm";
 import { editExpense, removeExpense } from "../actions/expenses";
 
 const EditExpensePage = (props) => {
-  console.log(props);
   return (
     <div>
       <ExpenseForm
       expense={props.expense}
-      onSubmit={(expense) => {
+      onSubmit={(expense) => { // replaced by spy inside test file.
         props.dispatch(editExpense(props.expense.id, expense));
         props.history.push("/")
       }}/>
@@ -23,7 +22,7 @@ const EditExpensePage = (props) => {
 
 const mapStateToProps = (state, props) => { // we have access to the props as the second argument here.
   return {
-    expense: state.expenses.find((expense) => expense.id === props.match.params.id )
+    expense: state.expenses.find((expense) => expense.id === props.match.params.id ) // the props.match.params comes from the Router (it's part of the URL)
   }
 };
 

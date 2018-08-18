@@ -1,12 +1,7 @@
 import React from "react";
 import moment from "moment";
 import { SingleDatePicker } from "react-dates"; // From airbnb datepicker
-import "react-dates/lib/css/_datepicker.css" // From airbnb datepicker
 import "react-dates/initialize";
-
-// const date = new Date();
-// const now = moment();
-// now.format("h:m on MMM Do, YYYY");
 
 export default class ExpenseForm extends React.Component {
   constructor(props){
@@ -53,7 +48,7 @@ export default class ExpenseForm extends React.Component {
     if(!this.state.description || !this.state.amount){
       this.setState(() => ({ error: "Please set a description and amount."}))
     } else {
-      this.props.onSubmit({ // Fired method passed down from as a prop from parent component.
+      this.props.onSubmit({ // Fired method passed down from as a prop from parent component. Replace this w/ spy...
         description: this.state.description,
         note: this.state.note,
         amount: parseFloat(this.state.amount, 10) * 100, // converts string to number
