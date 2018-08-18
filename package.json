@@ -5,13 +5,12 @@
   "author": "Harry Cramer",
   "license": "MIT",
   "scripts": {
-    "serve": "live-server public/",
     "build:dev": "webpack",
     "build:prod": "webpack -p --env production",
     "dev-server": "webpack-dev-server",
     "test": "jest --config=jest.config.json --watch",
     "start": "node server/server.js",
-    "heroku-postbuild" : "npm run build:prod"
+    "heroku-postbuild": "npm run build:prod"
   },
   "dependencies": {
     "babel-cli": "6.24.1",
@@ -22,10 +21,10 @@
     "babel-preset-env": "1.5.2",
     "babel-preset-react": "6.24.1",
     "css-loader": "0.28.4",
-    "live-server": "^1.2.0",
     "moment": "^2.22.2",
     "node-sass": "4.5.3",
     "normalize.css": "7.0.0",
+    "production": "0.0.2",
     "react": "^16.0.0",
     "react-dates": "^17.2.0",
     "react-modal": "2.2.2",
@@ -36,8 +35,7 @@
     "sass-loader": "6.0.6",
     "style-loader": "0.18.2",
     "validator": "8.0.0",
-    "webpack": "3.1.0",
-    "webpack-dev-server": "2.5.1"
+    "webpack": "3.1.0"
   },
   "devDependencies": {
     "axios": "^0.18.0",
@@ -51,6 +49,6 @@
     "react-test-renderer": "^16.4.2",
     "rss-parser": "^3.4.3",
     "uuid": "^3.3.2",
-    "xml2js": "^0.4.19"
+    "webpack-dev-server": "2.5.1"
   }
 }
