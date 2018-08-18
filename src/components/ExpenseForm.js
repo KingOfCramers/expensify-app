@@ -1,10 +1,24 @@
 import React from "react";
+import moment from "moment";
+import { SingleDatePicker } from "react-dates"; // From airbnb datepicker
+import "react-dates/lib/css/_datepicker.css" // From airbnb datepicker
+import "react-dates/initialize";
+
+// const date = new Date();
+// const now = moment();
+// now.format("h:m on MMM Do, YYYY");
 
 export default class ExpenseForm extends React.Component {
-  state = {
-    description: "",
-    note: "",
-    amount: ""
+  constructor(props){
+    super(props);
+    this.state = {
+      description: props.expense ? props.expense.description : "",
+      note: props.expense ? props.expense.note : "",
+      amount: props.expense ? (props.expense.amount/100).toString() : "",
+      createdAt: props.expense ? moment(props.expense.createdAt) : moment(),
+      calendarFocused: false,
+      error: ""
+    }
   }
 
   onDescriptionChange = (e) => {
@@ -19,15 +33,39 @@ export default class ExpenseForm extends React.Component {
 
   onAmountChange = (e) => {
     const amount = e.target.value;
-    if(amount.match(/^\d*(\.\d{0,2})?$/)){
+    if(!amount || amount.match(/^\d{1,}(\.\d{0,2})?$/)){ // If amount is blank ("" string is falsey value, !amount === true) or amount is a match, set that value. This is handled later by our error handler inside onSubmit.
       this.setState(() => ({ amount }))
+    }
+  }
+
+  onDateChange = (createdAt) => {
+    if(createdAt){
+      this.setState(() => ({ createdAt }));
+    }
+  }
+
+  onFocusChange = ({ focused }) => {
+    this.setState(() => ({ calendarFocused: focused }));
+  }
+
+  onSubmit = (e) => {
+    e.preventDefault();
+    if(!this.state.description || !this.state.amount){
+      this.setState(() => ({ error: "Please set a description and amount."}))
+    } else {
+      this.props.onSubmit({ // Fired method passed down from as a prop from parent component.
+        description: this.state.description,
+        note: this.state.note,
+        amount: parseFloat(this.state.amount, 10) * 100, // converts string to number
+        createdAt: this.state.createdAt.valueOf() // Gets milliseconds from moment object.
+      }) // Passed down...
     }
   }
 
   render(){
     return (
       <div>
-        <form>
+        <form onSubmit={this.onSubmit}>
           <input
             type="text"
             placeholder="Description"
@@ -41,6 +79,14 @@ export default class ExpenseForm extends React.Component {
             value={this.state.amount}
             onChange={this.onAmountChange}
           />
+          <SingleDatePicker
+            date={this.state.createdAt}
+            onDateChange={this.onDateChange}
+            focused={this.state.calendarFocused}
+            onFocusChange={this.onFocusChange}
+            numberOfMonths={1}
+            isOutsideRange={(day) => false}
+          />
           <textarea
           placeholder="add a note for your expense (optional)"
           value={this.state.note}
@@ -48,6 +94,7 @@ export default class ExpenseForm extends React.Component {
           >
           </textarea>
           <button>Add Expense</button>
+          {this.state.error && <p className="errorWarning">{this.state.error}</p>}
         </form>
       </div>
     );

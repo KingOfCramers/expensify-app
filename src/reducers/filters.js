@@ -1,13 +1,11 @@
-// Expenses Reducer
-
-  const expensesReducerDefaultState = []; // Empty array...
+import moment from "moment";
 
 // Filters Reducer
   const filtersReducerDefaultState = {
     text: '',
     sortBy: 'date',
-    startDate: undefined,
-    endDate: undefined
+    startDate: moment().startOf("month"), /* Actually a function */
+    endDate: moment().endOf("month") /* Also a function */
   }
 
   ;
@@ -31,12 +29,12 @@
       case "SET_START_DATE" :
         return {
           ...state,
-          startDate: action.date
+          startDate: action.startDate
         }
       case "SET_END_DATE" :
         return {
           ...state,
-          endDate: action.date
+          endDate: action.endDate
         }
       default:
         return state;

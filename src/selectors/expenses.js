@@ -1,8 +1,12 @@
-// Get visible expenses
-  const getVisibleExpenses = (expenses, { text, sortBy, startDate, endDate }) => {
+import moment from "moment";
+
+// Get visible expenses (takes in current Redux state.expenses and state.filters)
+// Returns an array of visible expenses...
+  const selectExpenses = (expenses, { text, sortBy, startDate, endDate }) => {
     return expenses.filter((expense) => {
-      const startDateMatch = typeof startDate !== 'number' || expense.createdAt >= startDate; // If undefined, return true (don't filter) OR if expense created after startDate, return true (don't filter)
-      const endDateMatch = typeof endDate !== 'number' || expense.createdAt <= endDate; // Same as above...
+      const createdAtMoment = moment(expense.createdAt); // .createdAt is raw number, will output moment object w/ correct date.
+      const startDateMatch = startDate ? startDate.isSameOrBefore(createdAtMoment, "day") : true; // if startDate filter prop exists, check to see if it (it's a moment) is same or before the createdAt prop from this expense. If it is, return false (don't filter out expense)
+      const endDateMatch = endDate ? endDate.isSameOrAfter(createdAtMoment, "day") : true;  // Same as above...
       const textMatch = expense.description.toLowerCase().includes(text.toLowerCase()) || expense.note.toLowerCase().includes(text.toLowerCase()) // If an empty string, return true (don't filter) OR if note/description includes text, don't filter (no need for text === '' condition, all strings will have it)
       return startDateMatch && endDateMatch && textMatch;
     }).sort((a, b) => {
@@ -16,4 +20,4 @@
     });
   }
 
-export default getVisibleExpenses;
+export default selectExpenses;

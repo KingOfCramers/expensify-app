@@ -5,7 +5,7 @@ const expensesReducer = (state = expensesReducerDefaultState, action) => {
       return [...state, action.expense ]; // Don't use push!
     case "REMOVE_EXPENSE" :
       return state.filter((expense) => {
-        return expense.id !== action.expense.id;
+        return expense.id !== action.id;
       });
     case "EDIT_EXPENSE" :
       return state.map((expense) => {

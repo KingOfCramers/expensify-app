@@ -8,14 +8,14 @@ import { Provider } from "react-redux";
 import configureStore from "./store/configureStore";
 import { addExpense, removeExpense, editExpense } from "./actions/expenses";
 import { sortByAmount, sortByDate, setStartDate, setEndDate, setTextFilter } from "./actions/filters";
-import getVisibleExpenses from "./selectors/expenses.js";
 import AppRouter from "./routers/AppRouter"
 
 const store = configureStore();
 
-const expenseOne = store.dispatch(addExpense({description: 'Rent', amount: 100, createdAt: -20}));
-const expenseTwo = store.dispatch(addExpense({description: 'Coffee', amount: 500, createdAt: 20}));
-const expenseThree = store.dispatch(addExpense({description: 'Remove ME!', amount: 900}));
+store.dispatch(addExpense({description: 'Rent', amount: 100}));
+store.dispatch(addExpense({description: 'Coffee', amount: 6000}));
+store.dispatch(addExpense({description: 'Gas Bill', amount: 1098}));
+
 // Routes
 const jsx = (
   <Provider store={store}>
@@ -24,3 +24,5 @@ const jsx = (
 );
 
 ReactDOM.render(jsx, document.getElementById('app'));
+
+import moment from "moment";
