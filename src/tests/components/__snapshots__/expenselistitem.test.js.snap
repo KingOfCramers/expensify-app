@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Expect to create new expense list item 1`] = `
+<div>
+  <Link
+    replace={false}
+    to="/edit/1"
+  >
+    Sledge 1
+  </Link>
+  <p>
+    1000
+     - 
+    -345600000
+  </p>
+</div>
+`;
