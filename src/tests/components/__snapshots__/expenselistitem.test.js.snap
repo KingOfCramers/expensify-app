@@ -9,9 +9,9 @@ exports[`Expect to create new expense list item 1`] = `
     Sledge 1
   </Link>
   <p>
-    1000
-     - 
-    -345600000
+    $10.00
+    -
+    Dec 27, 1969
   </p>
 </div>
 `;
