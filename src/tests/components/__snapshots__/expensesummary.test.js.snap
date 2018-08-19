@@ -1,0 +1,37 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Should output 0 for no expenses  1`] = `
+<div>
+  <h3>
+    You're viewing 
+    0
+     expenses with a value of 
+    $0.00
+    .
+  </h3>
+</div>
+`;
+
+exports[`Should summarize multiple expenses 1`] = `
+<div>
+  <h3>
+    You're viewing 
+    34
+     expenses with a value of 
+    $1,322.13
+    .
+  </h3>
+</div>
+`;
+
+exports[`Should summarize single expense 1`] = `
+<div>
+  <h3>
+    You're viewing 
+    1
+     expenses with a value of 
+    $10.00
+    .
+  </h3>
+</div>
+`;
