@@ -5,7 +5,7 @@ import { Provider } from "react-redux";
 
 // Redux
 import configureStore from "./store/configureStore";
-import { addExpense, removeExpense, editExpense } from "./actions/expenses";
+import { startAddExpense, removeExpense, editExpense } from "./actions/expenses";
 import { sortByAmount, sortByDate, setStartDate, setEndDate, setTextFilter } from "./actions/filters";
 import AppRouter from "./routers/AppRouter"
 
@@ -14,13 +14,15 @@ import 'normalize.css/normalize.css';
 import './styles/styles.scss';
 import "react-dates/lib/css/_datepicker.css"; // From airbnb datepicker
 
+// Firebase
+import "./firebase/firebase";
 const store = configureStore();
 
 // console.log("Source maps working");
 
-store.dispatch(addExpense({description: 'Rent', amount: 100}));
-store.dispatch(addExpense({description: 'Coffee', amount: 6000}));
-store.dispatch(addExpense({description: 'Gas Bill', amount: 1098}));
+store.dispatch(startAddExpense({description: 'Rent', amount: 100}));
+store.dispatch(startAddExpense({description: 'Coffee', amount: 6000}));
+store.dispatch(startAddExpense({description: 'Gas Bill', amount: 1098}));
 
 // Routes
 const jsx = (
@@ -30,5 +32,3 @@ const jsx = (
 );
 
 ReactDOM.render(jsx, document.getElementById('app'));
-
-import moment from "moment";

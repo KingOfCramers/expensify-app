@@ -3,6 +3,7 @@ import ExpenseForm from "../../components/ExpenseForm";
 import { shallow } from "enzyme";
 import expenses from "../fixtures/expenses";
 import toJSON from "enzyme-to-json";
+import moment from "moment";
  // const wrapper = shallow(<ExpenseForm />); This cannot be declared as a global variable, because the tests each are adding data to it, which would break subsequent tests that rely on a blank slate.
 
 test("It should render expense form", () => {
@@ -83,9 +84,19 @@ test("Should call onSubmit with proper data (spy)", () => {
   });
 });
 
+test("Should set new date on date change", () => {
+  const wrapper = shallow(<ExpenseForm /> );
+  const now = moment();
+  expect(wrapper).toMatchSnapshot(); // Check that initial snapshot has no error
+  wrapper.find("withStyles(SingleDatePicker)").prop("onDateChange")(now) // will find subcomponent directly, Enzyme .prop gives us the value of that specific prop (in this case a function)
+  expect(wrapper.state("createdAt")).toEqual(now);
+});
 
-
-
+test("Should set calendarFocused on change", () => {
+  const wrapper = shallow(<ExpenseForm /> );
+  wrapper.find("withStyles(SingleDatePicker)").prop("onFocusChange")({ focused: true });
+  expect(wrapper.state("calendarFocused")).toBe(true);
+});
 
 
 
