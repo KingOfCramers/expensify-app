@@ -18,12 +18,6 @@ import "react-dates/lib/css/_datepicker.css"; // From airbnb datepicker
 import "./firebase/firebase";
 const store = configureStore();
 
-// console.log("Source maps working");
-
-store.dispatch(startAddExpense({description: 'Rent', amount: 100}));
-store.dispatch(startAddExpense({description: 'Coffee', amount: 6000}));
-store.dispatch(startAddExpense({description: 'Gas Bill', amount: 1098}));
-
 // Routes
 const jsx = (
   <Provider store={store}>
