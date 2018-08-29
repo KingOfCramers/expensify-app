@@ -26,11 +26,13 @@ import database from "../firebase/firebase";
    export const startAddExpense = ({ description = "", note = "", amount = 0, createdAt = moment().valueOf() } = {}) => {
     return (dispatch) => { // The
       const expense = { description, note, amount, createdAt };
-      database.ref("expenses").push(expense).then((ref) => {
+
+      return database.ref("expenses").push(expense).then((ref) => { // Returning for testing purposes...
          dispatch(addExpense({
           id: ref.key, // from firebase...
           ...expense
          }));
+
       });
     };
    };
