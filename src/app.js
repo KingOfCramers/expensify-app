@@ -5,8 +5,7 @@ import { Provider } from "react-redux";
 
 // Redux
 import configureStore from "./store/configureStore";
-import { startAddExpense, removeExpense, editExpense } from "./actions/expenses";
-import { sortByAmount, sortByDate, setStartDate, setEndDate, setTextFilter } from "./actions/filters";
+import { startSetExpenses } from "./actions/expenses";
 import AppRouter from "./routers/AppRouter"
 
 // Styles
@@ -25,4 +24,8 @@ const jsx = (
   </Provider>
 );
 
-ReactDOM.render(jsx, document.getElementById('app'));
+ReactDOM.render(<p>Loading...</p>, document.getElementById('app'));
+
+store.dispatch(startSetExpenses()).then(() => {
+  ReactDOM.render(jsx, document.getElementById('app'));
+});
