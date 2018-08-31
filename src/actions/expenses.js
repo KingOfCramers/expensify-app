@@ -14,7 +14,16 @@ import database from "../firebase/firebase";
    export const removeExpense = ({ id } = {}) => ({
       type: "REMOVE_EXPENSE",
       id
-    })
+    });
+
+   export const startRemoveExpense = ({ id } = {}) => {
+    return (dispatch) => {
+        return Promise.resolve("data")
+    }; // Accepts an ID, returns a function with dispatch as the argument.
+       // That function is returned a promise.
+       // Therefore, to call startRemoveExpense we need to write: startRemoveExpense({data: data})().then(() => { do something else...})
+   };
+
 
   // EDIT_EXPENSE action generator
    export const editExpense = (id, updates) => ({
@@ -27,7 +36,7 @@ import database from "../firebase/firebase";
    // Thunk allows us to "dispatch" functions. The function connects to firebase, and then returns our action...
 
    export const startAddExpense = ({ description = "", note = "", amount = 0, createdAt = moment().valueOf() } = {}) => {
-    return (dispatch) => {
+    return (dispatch) => { // Return a function, with dispatch as the argument...
       const expense = { description, note, amount, createdAt };
 
       return database.ref("expenses").push(expense).then((ref) => { // Returning for testing purposes...
