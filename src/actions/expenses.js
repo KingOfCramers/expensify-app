@@ -18,10 +18,11 @@ import database from "../firebase/firebase";
 
    export const startRemoveExpense = ({ id } = {}) => {
     return (dispatch) => {
-        return Promise.resolve("data")
-    }; // Accepts an ID, returns a function with dispatch as the argument.
-       // That function is returned a promise.
-       // Therefore, to call startRemoveExpense we need to write: startRemoveExpense({data: data})().then(() => { do something else...})
+      return database.ref(`expenses/${id}`).remove()
+        .then(() => {
+          dispatch(removeExpense({ id }));
+        });
+    };
    };
 
 
