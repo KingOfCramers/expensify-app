@@ -108,8 +108,8 @@ test("Should get and set data from firebase", (done) => {
   store.dispatch(startSetExpenses()).then(() => {
     const actions = store.getActions();
     expect(actions[0]).toEqual({
-      type: "SET_EXPENSES",
-      expenses
+       type: 'SET_EXPENSES',
+       expenses
     });
     done();
   });

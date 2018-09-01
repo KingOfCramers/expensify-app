@@ -12,7 +12,7 @@ export class EditExpensePage extends React.Component {
   };
 
   onRemove = () => {
-    this.props.startRemoveExpense({id: this.props.expense.id }).then(() => { console.log("This worked!")} ) // You could chain on an action here!
+    this.props.startRemoveExpense({id: this.props.expense.id }) // .then(() => { console.log("This worked!")} ) // You could chain on an action here!
     this.props.history.push("/")
   };
  //
