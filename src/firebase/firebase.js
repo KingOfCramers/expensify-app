@@ -10,8 +10,9 @@ const config = {
  };
 
 firebase.initializeApp(config); // Connect to firebase.
-const database = firebase.database();
+const database = firebase.database(); // Reference to our database.
+const googleAuthProvider = new firebase.auth.GoogleAuthProvider(); // Our Google authentication.
 
-const googleAuthProvider = new firebase.auth.GoogleAuthProvider();
 
+// Export all for use in main app.js
 export { firebase, googleAuthProvider, database as default };

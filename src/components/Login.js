@@ -6,7 +6,7 @@ class LoginPage extends React.Component {
   render(){
     return (
       <div>
-        <form>
+        <form onSubmit={this.props.startLogin}>
           <input
             type="text"
             placeholder="Email"
@@ -16,7 +16,7 @@ class LoginPage extends React.Component {
             type="text"
             placeholder="Password"
           />
-          <button onClick={this.props.startLogin}>Login</button>
+          <button>Login</button>
         </form>
       </div>
     );
@@ -24,7 +24,10 @@ class LoginPage extends React.Component {
 };
 
 const mapDispatchToProps = (dispatch) => ({
-  startLogin: () => dispatch(startLogin)
+  startLogin: (e) => {
+    dispatch(startLogin()) // Auth "action" function fetched from auth folder. Returned function made possible by "thunk".
+    e.preventDefault();
+  }
 });
 
 export default connect(undefined, mapDispatchToProps)(LoginPage);
