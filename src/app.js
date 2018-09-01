@@ -6,7 +6,8 @@ import { Provider } from "react-redux";
 // Redux
 import configureStore from "./store/configureStore";
 import { startSetExpenses } from "./actions/expenses";
-import AppRouter, { history } from "./routers/AppRouter";
+import { login, logout } from "./actions/auth";
+import AppRouter, { history } from "./routers/AppRouter"; // History property shows history of router. We use this instead of default history of browser.
 
 const store = configureStore();
 
@@ -40,13 +41,15 @@ ReactDOM.render(<p>Loading...</p>, document.getElementById('app'));
 // Authentication
 firebase.auth().onAuthStateChanged((user) => { // Fires when authentication status changes
   if (user) {
+    store.dispatch(login(user.uid))
     store.dispatch(startSetExpenses()).then(() => { // Get expenses..
       renderApp();
-      if (history.location.pathname === "/") { // If user is coming from login page, redirect to dashboard. Otherwise, don't.
+      if (history.location.pathname === "/") { // If user is coming from login page, redirect to dashboard. Otherwise, keep them at current page.
         history.push("/dashboard");
       }
     });
   } else {
+    store.dispatch(logout());
     renderApp(); // Will not fire again if user is ACTIVELY logging out, will only push to home page.
     history.push("/"); // Recieved from the router...
   }
