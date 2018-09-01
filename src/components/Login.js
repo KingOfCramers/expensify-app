@@ -1,19 +1,8 @@
 import React from "react";
+import { connect } from "react-redux";
+import { startLogin } from "../actions/auth";
 
 class LoginPage extends React.Component {
-  state =  {
-    email: "",
-    password: ""
-  }
-
-  onEmailChange() {
-    console.log("Loaded")
-  }
-
-  onPasswordChange(){
-    console.log("Loaded")
-  }
-
   render(){
     return (
       <div>
@@ -22,20 +11,20 @@ class LoginPage extends React.Component {
             type="text"
             placeholder="Email"
             autoFocus
-            value={this.state.email}
-            onChange={this.onEmailChange}
           />
           <input
             type="text"
             placeholder="Password"
-            value={this.state.password}
-            onChange={this.onPasswordChange}
           />
-          <button>Login</button>
+          <button onClick={this.props.startLogin}>Login</button>
         </form>
       </div>
     );
   };
 };
 
-export default LoginPage;
+const mapDispatchToProps = (dispatch) => ({
+  startLogin: () => dispatch(startLogin)
+});
+
+export default connect(undefined, mapDispatchToProps)(LoginPage);

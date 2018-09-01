@@ -1,24 +1,17 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Should render login page 1`] = `
-<div>
-  <form>
-    <input
-      autoFocus={true}
-      onChange={[Function]}
-      placeholder="Email"
-      type="text"
-      value=""
-    />
-    <input
-      onChange={[Function]}
-      placeholder="Password"
-      type="text"
-      value=""
-    />
-    <button>
-      Login
-    </button>
-  </form>
-</div>
+<LoginPage
+  startLogin={[Function]}
+  store={
+    Object {
+      "clearActions": [Function],
+      "dispatch": [Function],
+      "getActions": [Function],
+      "getState": [Function],
+      "replaceReducer": [Function],
+      "subscribe": [Function],
+    }
+  }
+/>
 `;

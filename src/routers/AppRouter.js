@@ -13,17 +13,15 @@ import LoginPage from "../components/Login";
 const AppRouter = () => (
   <BrowserRouter>
     <div>
+      <Header/>
       <Switch>
         <Route exact path="/" component={LoginPage} />
-        <Route path="*" component={FourOhFour}/>
-      </Switch>
-      <Switch>
-        <Header/>
         <Route path="/dashboard" component={ExpenseDashboardPage} />
         <Route path="/dashboard" component={ExpenseDashboardPage} />
         <Route path="/create" component={AddExpensePage} />
         <Route path="/edit/:id" component={EditExpensePage} />
         <Route path="/help" component={HelpPage} />
+        <Route path="*" component={FourOhFour}/>
       </Switch>
     </div>
   </BrowserRouter>
