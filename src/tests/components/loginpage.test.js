@@ -1,13 +1,16 @@
 import React from "react";
 import { shallow } from "enzyme";
-import LoginPage from "../../components/Login";
-import configureMockStore from 'redux-mock-store';
+import { LoginPage } from "../../components/LoginPage"; // Make sure to get named exports to avoid problems w/ connect.
 import thunk from 'redux-thunk';
 
-const createMockStore = configureMockStore([thunk]);
-
 test("Should render login page", () => {
-  const store = createMockStore({});
-  const wrapper = shallow(<LoginPage store={store} />);
+  const wrapper = shallow(<LoginPage />);
   expect(wrapper).toMatchSnapshot();
+});
+
+test("Should call startLogin on button click", () => {
+  const login = jest.fn();
+  const wrapper = shallow(<LoginPage startLogin={login}/>);
+  wrapper.find("button").simulate("click");
+  expect(login).toHaveBeenCalled();
 });
