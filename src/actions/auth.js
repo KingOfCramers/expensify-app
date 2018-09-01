@@ -3,15 +3,16 @@ import { firebase, googleAuthProvider } from "../firebase/firebase";
 export const startLogin = () => {
   return () => {
     return firebase.auth().signInWithPopup(googleAuthProvider) // Access to authentication related technology...
-      .then(() => {
-        console.log("Logged in!");
+      .then((user) => {
+        console.log(user);
       })
   }
 };
 
 export const startLogout = () => {
   return () => {
-    return firebase.auth().signOut();
+    return firebase.auth().signOut()
+      .t
   };
 };
 /*

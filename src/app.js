@@ -6,7 +6,8 @@ import { Provider } from "react-redux";
 // Redux
 import configureStore from "./store/configureStore";
 import { startSetExpenses } from "./actions/expenses";
-import AppRouter from "./routers/AppRouter"
+import AppRouter, { history } from "./routers/AppRouter";
+
 const store = configureStore();
 
 // Styles
@@ -24,17 +25,29 @@ const jsx = (
   </Provider>
 );
 
+// Conditional (single-time rendering)
+let hasRendered = false;
+const renderApp = () => {
+  if(!hasRendered){
+    ReactDOM.render(jsx, document.getElementById('app'));
+    hasRendered = true;
+  }
+};
+
 // Loading
 ReactDOM.render(<p>Loading...</p>, document.getElementById('app'));
-store.dispatch(startSetExpenses()).then(() => {
-  ReactDOM.render(jsx, document.getElementById('app'));
-});
 
 // Authentication
 firebase.auth().onAuthStateChanged((user) => { // Fires when authentication status changes
   if (user) {
-    console.log("Log in.");
+    store.dispatch(startSetExpenses()).then(() => { // Get expenses..
+      renderApp();
+      if (history.location.pathname === "/") { // If user is coming from login page, redirect to dashboard. Otherwise, don't.
+        history.push("/dashboard");
+      }
+    });
   } else {
-    console.log("Log out.");
+    renderApp(); // Will not fire again if user is ACTIVELY logging out, will only push to home page.
+    history.push("/"); // Recieved from the router...
   }
 });

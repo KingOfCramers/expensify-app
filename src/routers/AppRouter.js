@@ -1,6 +1,8 @@
+// Router materials
 import React from 'react';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { Router, Route, Switch } from 'react-router-dom';
 
+// Routes
 import Header from "../components/Header.js"
 import ExpenseDashboardPage from "../components/ExpenseDashboardPage";
 import AddExpensePage from "../components/AddExpensePage";
@@ -8,10 +10,14 @@ import EditExpensePage from "../components/EditExpensePage";
 import HelpPage from "../components/HelpPage";
 import EditPage from "../components/EditExpensePage";
 import FourOhFour from "../components/FourOhFour";
-import LoginPage from "../components/Login";
+import LoginPage from "../components/LoginPage";
+
+// History
+import createHistory from "history/createBrowserHistory" // From history npm module...
+export const history = createHistory(); // Export this for use in the app.js file...
 
 const AppRouter = () => (
-  <BrowserRouter>
+  <Router history={ history }>
     <div>
       <Header/>
       <Switch>
@@ -24,7 +30,7 @@ const AppRouter = () => (
         <Route path="*" component={FourOhFour}/>
       </Switch>
     </div>
-  </BrowserRouter>
+  </Router>
 );
 
 export default AppRouter;
