@@ -9,7 +9,7 @@ export const logout = () => ({
   type: "LOGOUT",
 });
 
-export const startLogin = () => {
+export const startLogin = () => { // Not related to Redux store...
   return () => {
     return firebase.auth().signInWithPopup(googleAuthProvider)
   };
