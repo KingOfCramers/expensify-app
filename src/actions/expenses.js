@@ -51,7 +51,7 @@ import database from "../firebase/firebase";
 
       return database.ref(`users/${uid}/expenses`).push(expense).then((ref) => { // Returning for testing purposes...
          dispatch(addExpense({
-          id: ref.key, // from firebase...
+          id: ref.key, // from firebase... This is the id of the actual document!!! We access it later inside startEditExpense
           ...expense
          }));
 

@@ -1,5 +1,0 @@
-/// NPM install react-router to the project
-/// Pull BrowserRouter and Route components from react-router
-/// Add BrowserRouter, add an enclosing div inside (expects 1 internal div)
-/// Within the div, add Route components
-/// For each, add the path argument, and the component argument (referring to component)
