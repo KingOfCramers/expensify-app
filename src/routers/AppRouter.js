@@ -4,7 +4,7 @@ import { Router, Route, Switch } from 'react-router-dom';
 
 // History
 import createHistory from "history/createBrowserHistory";
-const history = createHistory();
+export const history = createHistory();
 
 // Components
 import Header from "../components/Header.js"

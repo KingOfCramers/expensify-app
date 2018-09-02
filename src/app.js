@@ -3,10 +3,10 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from "react-redux";
 
-// Redux
+// Redux + History
 import configureStore from "./store/configureStore";
 import { startSetExpenses } from "./actions/expenses";
-import AppRouter from "./routers/AppRouter"
+import AppRouter, { history } from "./routers/AppRouter"
 
 // Styles
 import 'normalize.css/normalize.css';
@@ -33,6 +33,6 @@ firebase.auth().onAuthStateChanged((user) => {
       ReactDOM.render(jsx, document.getElementById('app'));
     });
   } else {
-    console.log("logout");
+    history.push("/");
   };
 });
