@@ -1,6 +1,12 @@
+// React
 import React from 'react';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { Router, Route, Switch } from 'react-router-dom';
 
+// History
+import createHistory from "history/createBrowserHistory";
+const history = createHistory();
+
+// Components
 import Header from "../components/Header.js"
 import ExpenseDashboardPage from "../components/ExpenseDashboardPage";
 import AddExpensePage from "../components/AddExpensePage";
@@ -10,8 +16,9 @@ import EditPage from "../components/EditExpensePage";
 import FourOhFour from "../components/FourOhFour";
 import Login from "../components/Login";
 
+
 const AppRouter = () => (
-  <BrowserRouter>
+  <Router history={history} >
     <div>
       <Header/>
       <Switch>
@@ -23,7 +30,7 @@ const AppRouter = () => (
         <Route component={FourOhFour}/>
       </Switch>
     </div>
-  </BrowserRouter>
+  </Router>
 );
 
 export default AppRouter;
