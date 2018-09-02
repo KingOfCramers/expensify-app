@@ -41,6 +41,7 @@ ReactDOM.render(<p>Loading...</p>, document.getElementById('app'));
 // Authentication
 firebase.auth().onAuthStateChanged((user) => { // Fires when authentication status changes
   if (user) {
+    console.log("state changed")
     store.dispatch(login(user.uid))
     store.dispatch(startSetExpenses()).then(() => { // Get expenses..
       renderApp();
