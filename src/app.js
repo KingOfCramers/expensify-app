@@ -8,6 +8,14 @@ import configureStore from "./store/configureStore";
 import { startSetExpenses } from "./actions/expenses";
 import AppRouter, { history } from "./routers/AppRouter"
 
+let hasRendered = false;
+const renderApp = () => {
+  if(!hasRendered){
+    ReactDOM.render(jsx, document.getElementById('app'));
+  }
+  hasRendered = true;
+}
+
 // Styles
 import 'normalize.css/normalize.css';
 import './styles/styles.scss';
@@ -30,9 +38,13 @@ ReactDOM.render(<p>Loading...</p>, document.getElementById('app'));
 firebase.auth().onAuthStateChanged((user) => {
   if(user){
     store.dispatch(startSetExpenses()).then(() => {
-      ReactDOM.render(jsx, document.getElementById('app'));
+      renderApp(); // If logged in, render app w/ user data.
+      if (history.location.pathname === "/") { // On login page, to to dashboard.
+        history.push("/dashboard")
+      }
     });
   } else {
+    renderApp(); // Dont fetch data, rereoute to main login.
     history.push("/");
   };
 });
