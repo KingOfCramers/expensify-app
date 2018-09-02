@@ -6,7 +6,7 @@ import { startLogout } from "../actions/auth"; // A function...
 export const Header = ({ startLogout }) => ( // Props need to be imported in a stateless functional here!
   <header>
     <h1>Expensify</h1>
-    <NavLink exact to="/dashboard" activeClassName="is-active">Home</NavLink>
+    <NavLink to="/dashboard" activeClassName="is-active">Home</NavLink>
     <NavLink to="/create" activeClassName="is-active">Create</NavLink>
     <NavLink to="/help" activeClassName="is-active">Help</NavLink>
     <button onClick={startLogout}>Log out</button>
