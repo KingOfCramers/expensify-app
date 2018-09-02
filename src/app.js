@@ -15,6 +15,7 @@ import "react-dates/lib/css/_datepicker.css"; // From airbnb datepicker
 
 // Firebase
 import "./firebase/firebase";
+import { firebase } from "./firebase/firebase";
 const store = configureStore();
 
 // Routes
@@ -26,6 +27,12 @@ const jsx = (
 
 ReactDOM.render(<p>Loading...</p>, document.getElementById('app'));
 
-store.dispatch(startSetExpenses()).then(() => {
-  ReactDOM.render(jsx, document.getElementById('app'));
+firebase.auth().onAuthStateChanged((user) => {
+  if(user){
+    store.dispatch(startSetExpenses()).then(() => {
+      ReactDOM.render(jsx, document.getElementById('app'));
+    });
+  } else {
+    console.log("logout");
+  };
 });

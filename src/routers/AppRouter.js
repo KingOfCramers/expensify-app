@@ -8,13 +8,15 @@ import EditExpensePage from "../components/EditExpensePage";
 import HelpPage from "../components/HelpPage";
 import EditPage from "../components/EditExpensePage";
 import FourOhFour from "../components/FourOhFour";
+import Login from "../components/Login";
 
 const AppRouter = () => (
   <BrowserRouter>
     <div>
       <Header/>
       <Switch>
-        <Route exact path="/" component={ExpenseDashboardPage} />
+        <Route path="/" component={Login} exact={true} />
+        <Route exact path="/dashboard" component={ExpenseDashboardPage} />
         <Route path="/create" component={AddExpensePage} />
         <Route path="/edit/:id" component={EditExpensePage} />
         <Route path="/help" component={HelpPage} />

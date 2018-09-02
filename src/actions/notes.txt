@@ -1,0 +1,12 @@
+Google Authentication
+
+1) Create a login page component that is shown at the root ("/") and move the main dashboard over to dashboard ("/dashboard").
+2) Snapshot test
+3) Render new component at root in app.jss
+4) Enable authentication in firebase. (Online)
+5) Create a new googleProvider (new firebase.auth.GoogleAuthProvider) inside firebase.js and export it, with firebase
+6) Create login/logout action generator for authentication that fires firebase methods (must import googlegenerator, and firebase)
+7) Connect that action generator to the loginpage (w/ connect and dispatch mapper) (needs mapDispatchToProps, or function won't work!)
+8) Create/Connect logout action generator
+9) Create AuthStateChanged event handler in app.js file // Use firebase.auth().onAuthStateChanged callback user data to check if user is logged in.
+10) Conditionally render the output

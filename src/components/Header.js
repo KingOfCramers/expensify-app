@@ -1,14 +1,20 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
+import { connect } from "react-redux";
+import { startLogout } from "../actions/auth"; // A function...
 
-const Header = () => (
+export const Header = ({ startLogout }) => ( // Props need to be imported in a stateless functional here!
   <header>
     <h1>Expensify</h1>
     <NavLink exact to="/" activeClassName="is-active">Home</NavLink>
     <NavLink to="/create" activeClassName="is-active">Create</NavLink>
     <NavLink to="/help" activeClassName="is-active">Help</NavLink>
-    {/*<NavLink to="/edit" activeClassName="is-active">Edit</NavLink>*/}
+    <button onClick={startLogout}>Log out</button>
   </header>
 );
 
-export default Header;
+const mapDispatchToProps = (dispatch) => ({
+  startLogout: () => dispatch(startLogout())
+});
+
+export default connect(undefined, mapDispatchToProps)(Header);
