@@ -1,13 +1,13 @@
 import React from 'react';
 import { connect } from "react-redux";
 import ExpenseForm from "./ExpenseForm";
-import { editExpense, startRemoveExpense } from "../actions/expenses";
+import { startEditExpense, startRemoveExpense } from "../actions/expenses";
 
 /// GIT LEARNING TO ROLLBACK
 export class EditExpensePage extends React.Component {
 
   onSubmit = (expense) => {
-    this.props.editExpense(this.props.expense.id, expense);
+    this.props.startEditExpense(this.props.expense.id, expense);
     this.props.history.push("/")
   };
 
@@ -38,7 +38,7 @@ const mapStateToProps = (state, props) => { // we have access to the props as th
 const mapDispatchToProps = (dispatch, props) => {
   return {
     startRemoveExpense: (expense) => { return dispatch(startRemoveExpense(expense))}, // This returns a promise (the bottomn line is implicit return)... See the promise return example above.
-    editExpense: (id, expense) => dispatch(editExpense(id, expense))
+    startEditExpense: (id, expense) => dispatch(startEditExpense(id, expense))
   }
 }
 

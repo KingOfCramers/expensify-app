@@ -4,12 +4,6 @@ import database from "../firebase/firebase";
 
 // Action Generators
 
-  // ADD_EXPENSE action generator
-   export const addExpense = (expense) => ({
-      type: "ADD_EXPENSE",
-      expense
-    });
-
   // REMOVE_EXPENSE action generator
    export const removeExpense = ({ id } = {}) => ({
       type: "REMOVE_EXPENSE",
@@ -17,8 +11,9 @@ import database from "../firebase/firebase";
     });
 
    export const startRemoveExpense = ({ id } = {}) => {
-    return (dispatch) => {
-      return database.ref(`expenses/${id}`).remove()
+    return (dispatch, getState) => {
+      const uid = getState().auth.uid;
+      return database.ref(`users/${uid}/expenses/${id}`).remove()
         .then(() => {
           dispatch(removeExpense({ id }));
         });
@@ -26,21 +21,35 @@ import database from "../firebase/firebase";
    };
 
 
-  // EDIT_EXPENSE action generator
-   export const editExpense = (id, updates) => ({
-      type: "EDIT_EXPENSE",
-      id,
-      updates
-    });
+   // EDIT_EXPENSE action generator
+    export const editExpense = (id, updates) => ({
+       type: "EDIT_EXPENSE",
+       id,
+       updates
+     });
 
-   // This is made possible by our Redux middleware, thunk.
-   // Thunk allows us to "dispatch" functions. The function connects to firebase, and then returns our action...
+   export const startEditExpense = (id, updates) => {
+    return (dispatch, getState) => {
+      const uid = getState().auth.uid;
+      return database.ref(`users/${uid}/expenses/${id}`).update(updates)
+        .then(() => {
+          dispatch(editExpense(id, updates))
+        })
+    }
+   }
+
+   // ADD_EXPENSE action generator
+    export const addExpense = (expense) => ({
+       type: "ADD_EXPENSE",
+       expense
+     });
 
    export const startAddExpense = ({ description = "", note = "", amount = 0, createdAt = moment().valueOf() } = {}) => {
-    return (dispatch) => { // Return a function, with dispatch as the argument...
+    return (dispatch, getState) => { // Thunk returns an object dispatch and getState!
       const expense = { description, note, amount, createdAt };
+      const uid = getState().auth.uid; // Access to the user id!
 
-      return database.ref("expenses").push(expense).then((ref) => { // Returning for testing purposes...
+      return database.ref(`users/${uid}/expenses`).push(expense).then((ref) => { // Returning for testing purposes...
          dispatch(addExpense({
           id: ref.key, // from firebase...
           ...expense
@@ -58,8 +67,9 @@ import database from "../firebase/firebase";
     });
 
     export const startSetExpenses = () => {
-      return (dispatch) => {
-        return database.ref("expenses").once("value") // return this promise to activate our then call inside the main app page...
+      return (dispatch, getState) => { // THUNK!
+        const uid = getState().auth.uid;
+        return database.ref(`users/${uid}/expenses`).once("value") // return this promise to activate our then call inside the main app page...
           .then((snapshot) => {
             const expenses = [];
             snapshot.forEach((childSnapshot) => {
