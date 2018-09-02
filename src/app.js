@@ -6,6 +6,7 @@ import { Provider } from "react-redux";
 // Redux + History
 import configureStore from "./store/configureStore";
 import { startSetExpenses } from "./actions/expenses";
+import { login, logout } from "./actions/auth";
 import AppRouter, { history } from "./routers/AppRouter"
 
 let hasRendered = false;
@@ -37,6 +38,7 @@ ReactDOM.render(<p>Loading...</p>, document.getElementById('app'));
 
 firebase.auth().onAuthStateChanged((user) => {
   if(user){
+    store.dispatch(login(user.uid)); // Store uid prop inside Redux state.
     store.dispatch(startSetExpenses()).then(() => {
       renderApp(); // If logged in, render app w/ user data.
       if (history.location.pathname === "/") { // On login page, to to dashboard.
@@ -44,6 +46,7 @@ firebase.auth().onAuthStateChanged((user) => {
       }
     });
   } else {
+    store.dispatch(logout()); // Remove uid.
     renderApp(); // Dont fetch data, rereoute to main login.
     history.push("/");
   };
