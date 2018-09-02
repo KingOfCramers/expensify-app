@@ -1,6 +1,7 @@
 // React
 import React from 'react';
-import { Router, Route, Switch } from 'react-router-dom';
+import { Router, Route, Switch } from 'react-router-dom'; // Only use Route for public routes...
+import PrivateRoute from "./PrivateRoute"; // HOC of Route.
 
 // History
 import createHistory from "history/createBrowserHistory";
@@ -23,10 +24,10 @@ const AppRouter = () => (
       <Header/>
       <Switch>
         <Route path="/" component={Login} exact={true} />
-        <Route exact path="/dashboard" component={ExpenseDashboardPage} />
-        <Route path="/create" component={AddExpensePage} />
-        <Route path="/edit/:id" component={EditExpensePage} />
-        <Route path="/help" component={HelpPage} />
+        <PrivateRoute exact={true} path="/dashboard" component={ExpenseDashboardPage} />
+        <PrivateRoute path="/create" component={AddExpensePage} />
+        <PrivateRoute path="/edit/:id" component={EditExpensePage} />
+        <PrivateRoute path="/help" component={HelpPage} />
         <Route component={FourOhFour}/>
       </Switch>
     </div>
