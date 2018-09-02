@@ -8,7 +8,6 @@ import createHistory from "history/createBrowserHistory";
 export const history = createHistory();
 
 // Components
-import Header from "../components/Header.js"
 import ExpenseDashboardPage from "../components/ExpenseDashboardPage";
 import AddExpensePage from "../components/AddExpensePage";
 import EditExpensePage from "../components/EditExpensePage";
@@ -21,7 +20,6 @@ import Login from "../components/Login";
 const AppRouter = () => (
   <Router history={history} >
     <div>
-      <Header/>
       <Switch>
         <Route path="/" component={Login} exact={true} />
         <PrivateRoute exact={true} path="/dashboard" component={ExpenseDashboardPage} />
