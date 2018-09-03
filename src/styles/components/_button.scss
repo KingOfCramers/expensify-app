@@ -5,4 +5,11 @@
   padding: $s-size;
   font-weight: 300;
   font-size: $large-font-size;
+  display: inline-block; // Takes into effect top and bottom margin and padding
+  text-decoration: none;
+  line-height: 1;
+}
+
+.button--link {
+  background: none;
 }
