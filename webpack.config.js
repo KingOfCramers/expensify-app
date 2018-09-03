@@ -14,7 +14,7 @@ module.exports = (env) => {
   const isProduction = env === "production";
 
   return {
-    entry: './src/app.js',
+    entry: ['babel-polyfill', './src/app.js'], // 'babel-polyfill (for old browsers) will get setup first, then will get ./src/app.js as main app.
     output: {
       path: path.join(__dirname, 'public', 'dist'),
       filename: 'bundle.js'
