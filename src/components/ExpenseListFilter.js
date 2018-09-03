@@ -31,24 +31,38 @@ export class ExpenseListFilter extends React.Component {
 
   render(){
     return (
-      <div>
-          <input type="text" value={this.props.filters.text} onChange={this.onTextChange} />
-          <select onChange={this.onSortChange}>
-            <option value="date">Date</option>
-            <option value="amount">Amount</option>
-          </select>
-          <DateRangePicker
-            startDate={this.props.filters.startDate} // Accepts moment object
-            startDateId={"fluffykins"}
-            endDateId={"fluffykins"}
-            endDate={this.props.filters.endDate} // Accepts moment object
-            onDatesChange={this.onDatesChange} // passes startDate and endDate to function, to set new state.
-            focusedInput={this.state.calendarFocused}
-            onFocusChange={this.onFocusChange} // Sets focus state to calendarFocused state.
-            showClearDates={true}
-            numberOfMonths={1}
-            isOutsideRange={() => false}
-          />
+      <div className="content-container">
+        <div className="input-group">
+          <div className="input-group__item">
+            <input
+              type="text"
+              value={this.props.filters.text}
+              onChange={this.onTextChange}
+              className="text-input"
+              placeholder="Search expenses..."
+            />
+          </div>
+          <div className="input-group__item">
+            <select onChange={this.onSortChange} className="select">
+              <option value="date">Date</option>
+              <option value="amount">Amount</option>
+            </select>
+          </div>
+          <div className="input-group__item">
+            <DateRangePicker
+              startDate={this.props.filters.startDate} // Accepts moment object
+              startDateId={"fluffykins"}
+              endDateId={"fluffykins"}
+              endDate={this.props.filters.endDate} // Accepts moment object
+              onDatesChange={this.onDatesChange} // passes startDate and endDate to function, to set new state.
+              focusedInput={this.state.calendarFocused}
+              onFocusChange={this.onFocusChange} // Sets focus state to calendarFocused state.
+              showClearDates={true}
+              numberOfMonths={1}
+              isOutsideRange={() => false}
+            />
+          </div>
+        </div>
         </div>
     );
   }
