@@ -9,6 +9,9 @@ import { startSetExpenses } from "./actions/expenses";
 import { login, logout } from "./actions/auth";
 import AppRouter, { history } from "./routers/AppRouter"
 
+// Loading Page
+import Loading from "./components/Loading";
+
 let hasRendered = false;
 const renderApp = () => {
   if(!hasRendered){
@@ -34,7 +37,7 @@ const jsx = (
   </Provider>
 );
 
-ReactDOM.render(<p>Loading...</p>, document.getElementById('app'));
+ReactDOM.render(<Loading />, document.getElementById('app'));
 
 firebase.auth().onAuthStateChanged((user) => {
   if(user){
